@@ -1,0 +1,53 @@
+@startuml
+class User {
+    + ID: int
+    + Имя: string
+    + Контакты: string
+    + История заказов: Order[]
+}
+
+class Order {
+    + ID: int
+    + Статус: OrderStatus
+    + Позиции: Dish[]
+    + Цена: float
+    + Заказчик: User
+}
+
+class Restaurant {
+    + ID: int
+    + Название: string
+    + Меню: Dish[]
+    + Контакты: string
+}
+
+class Dish {
+    + ID: int
+    + Название: string
+    + Описание: string
+    + Цена: float
+    + Ресторан: Restaurant
+}
+
+class Courier {
+    + ID: int
+    + Имя: string
+    + Контакты: string
+    + Действующий заказ: Order
+}
+
+class Payment {
+    + ID: int
+    + Способ оплаты: string
+    + Статус: PaymentStatus
+    + Заказ: Order
+}
+
+User "1" --> "0..*" Order
+Order "1" --> "0..*" Dish
+Restaurant "1" --> "0..*" Dish
+Order "1" --> "1" User
+Order "1" --> "1" Courier
+Order "1" --> "1" Payment
+
+@enduml
